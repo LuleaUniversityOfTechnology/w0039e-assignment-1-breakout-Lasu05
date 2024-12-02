@@ -14,11 +14,11 @@ void DrawPaddle()
 
 void UpdatePaddle()
 {
-	if (Play::KeyDown(Play::KEY_LEFT))
+	if (Play::KeyDown(Play::KEY_LEFT) && paddle.x > 50)
 	{
 		paddle.x -= 5;
 	}
-	if (Play::KeyDown(Play::KEY_RIGHT))
+	if (Play::KeyDown(Play::KEY_RIGHT) && paddle.x < DISPLAY_WIDTH - 50)
 	{
 		paddle.x += 5;
 	}
@@ -95,26 +95,14 @@ void StepFrame( float elapsed)
 
 int Max(int b, int s)
 {
-	if (b > s || b == s)
-	{
-		return b;
-	}
-	else
-	{
-		return s;
-	}
+	bool max = b > s || b == s;
+	return max ? b : s;
 }
 
 int Min(int b, int s)
 {
-	if (s > b || s == b) 
-	{
-		return b;
-	}
-	else
-	{
-		return s;
-	}
+	bool min = b < s || b == s;
+	return min ? b : s; 
 }
 
 bool IsColliding(GameObject& ball)
